@@ -29,11 +29,11 @@
         <thead>
           <tr>
               <th>Nome</th>
-              <th nota-aluno="n1">Nota 1</th>
-              <th nota-aluno="n2">Nota 2</th>
-              <th nota-aluno="n3">Nota 3</th>
-              <th nota-aluno="n4">Nota 4</th>
-              <th nota-aluno="media">Média</th>
+              <th aluno-nota="n1">Nota 1</th>
+              <th aluno-nota="n2">Nota 2</th>
+              <th aluno-nota="n3">Nota 3</th>
+              <th aluno-nota="n4">Nota 4</th>
+              <th aluno-nota="media">Média</th>
           </tr>
         </thead>
 
@@ -142,13 +142,15 @@
         (function(){
 
           function pegaIndice(indice) {
-            const trHeader = document.querySelector("thead th")
+            const trHeader = document.querySelector("thead tr")
             const thsHeader = trHeader.querySelectorAll("th")
             
-            const th = trHeader.querySelector(`[nota-aluno="${indice}"]`)
-
+            const th = trHeader.querySelector(`[aluno-nota="${indice}"]`)
+       
             const i = Array.from(thsHeader).indexOf(th)
-            return i;
+            //const i = [...thsHeader].indexOf(th)
+            // console.log(th)
+            return i
           }
 
           const trs = document.querySelectorAll('tbody tr')
@@ -160,7 +162,7 @@
               n3: pegaIndice('n3'),
               n4: pegaIndice('n4'),
               media: pegaIndice('media') 
-          };
+          }
 
           let x = 0
           let media = 0
@@ -169,8 +171,7 @@
               console.log(trs[x])
 
               const tds = trs[x].querySelectorAll("td")
-              console.log(tds)
-
+             
               media = avarege(
                   parseFloat(tds[INDICES_NOTAS.n1].textContent),
                   parseFloat(tds[INDICES_NOTAS.n2].textContent),
