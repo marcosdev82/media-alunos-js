@@ -36,98 +36,8 @@
               <th aluno-nota="media">Média</th>
           </tr>
         </thead>
-
         <tbody>
-            <tr>
-              <td>Daniel</td>
-              <td>10</td>
-              <td>3</td>
-              <td>7.5</td>
-              <td>3</td>
-              <td></td>
-            </tr>
-          
-            <tr>
-              <td>Maria</td>
-              <td>10</td>
-              <td>9</td>
-              <td>3</td>
-              <td>9.5</td>
-              <td></td>
-            </tr>
-          
-            <tr>
-              <td>João</td>
-              <td>10</td>
-              <td>4.5</td>
-              <td>1</td>
-              <td>3.5</td>
-              <td></td>
-            </tr>
-          
-            <tr>
-              <td>Joana</td>
-              <td>1</td>
-              <td>3</td>
-              <td>9</td>
-              <td>1.5</td>
-              <td></td>
-            </tr>
-          
-            <tr>
-              <td>José</td>
-              <td>10</td>
-              <td>4.5</td>
-              <td>7</td>
-              <td>3</td>
-              <td></td>
-            </tr>
-          
-            <tr>
-              <td>Arnaldo</td>
-              <td>10</td>
-              <td>4.5</td>
-              <td>7</td>
-              <td>3</td>
-              <td></td>
-            </tr>
-          
-            <tr>
-              <td>Lucas</td>
-              <td>4.5</td>
-              <td>9</td>
-              <td>8</td>
-              <td>3</td>
-              <td></td>
-            </tr>
-          
-            <tr>
-              <td>Luana</td>
-              <td>3</td>
-              <td>7</td>
-              <td>9</td>
-              <td>3</td>
-              <td></td>
-            </tr>
-          
-            <tr>
-              <td>Beatriz</td>
-              <td>10</td>
-              <td>4</td>
-              <td>7</td>
-              <td>9</td>
-              <td></td>
-            </tr>
-          
-            <tr>
-              <td>Sergio</td>
-              <td>4.5</td>
-              <td>9.5</td>
-              <td>10</td>
-              <td>2</td>
-              <td></td>
-            </tr>
-          </tbody>
+        </tbody>
       </table>
       </div>
 
@@ -140,56 +50,38 @@
         
 
         (function(){
-        
-            const trHeader = document.querySelector("thead tr")
-            const thsHeader = trHeader.querySelectorAll("th")
-            const thAlunosNota = trHeader.querySelectorAll("[aluno-nota]") 
-            const INDICES_NOTA = {}
-
-            Array.from(thAlunosNota).forEach(function(th){
-              let prop = th.getAttribute("aluno-nota")
-              INDICES_NOTA[prop] = pegaIndice(th)
-            })
-
-            function pegaIndice(indice) {
-
-            const th = trHeader.querySelector(`[aluno-nota="${indice}"]`)
-
-            const i = Array.from(thsHeader).indexOf(th)
-            //const i = [...thsHeader].indexOf(th)
-            // console.log(th)
-            return i
-            }
-
-            const trs = document.querySelectorAll('tbody tr')
-            // console.log(trs[0].querySelectorAll('td')[0].textContent)
-
-            const INDICES_NOTAS = {
-                n1: pegaIndice('n1'),
-                n2: pegaIndice('n2'),
-                n3: pegaIndice('n3'),
-                n4: pegaIndice('n4'),
-                media: pegaIndice('media') 
-            }
-
-            let x = 0
-            let media = 0
-
-            while(trs[x]) {
   
-            const tds = trs[x].querySelectorAll("td")
+          const alunos = [
+            { nome: "Daniel", n1: 10, n2: 3, n3: 7.5, n4: 3 },
+            { nome: "Maria", n1: 10, n2: 9, n3: 3, n4: 9.5 },
+            { nome: "João", n1: 10, n2: 4.5, n3: 1, n4: 3.5 },
+            { nome: "Joana", n1: 1, n2: 3, n3: 9, n4: 1.5 },
+            { nome: "José", n1: 10, n2: 4.5, n3: 7, n4: 3 },
+            { nome: "Arnaldo", n1: 10, n2: 4.5, n3: 7, n4: 3 },
+            { nome: "Lucas", n1: 4.5, n2: 9, n3: 8, n4: 3 },
+            { nome: "Luana", n1: 3, n2: 7, n3: 9, n4: 3 },
+            { nome: "Beatriz", n1: 10, n2: 4, n3: 7, n4: 9 },
+            { nome: "Sergio", n1: 4.5, n2: 9.5, n3: 10, n4: 2 }
+          ];
 
-            media = avarege(
-                parseFloat(tds[INDICES_NOTAS.n1].textContent),
-                parseFloat(tds[INDICES_NOTAS.n2].textContent),
-                parseFloat(tds[INDICES_NOTAS.n3].textContent),
-                parseFloat(tds[INDICES_NOTAS.n4].textContent),
-            )
-            x++
+          alunos.forEach(aluno => {
+              aluno.media = avarege(aluno.n1,aluno.n2,aluno.n3,aluno.n4)
+          })
 
-            tds[INDICES_NOTAS.media].textContent = media
+ 
+          const html = alunos.map(aluno => `
+              <tr>
+                <td>${aluno.nome}</td>
+                <td>${aluno.n1}</td>
+                <td>${aluno.n2}</td>
+                <td>${aluno.n3}</td>
+                <td>${aluno.n4}</td>
+                <td>${aluno.media}</td>
+              </tr>
+          `).join("")
 
-            }
+          document.querySelector('tbody').innerHTML = html
+         
         })()
        </script>
       
