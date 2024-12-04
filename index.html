@@ -13,6 +13,12 @@
         .underlined{
           border-bottom: 3px solid currentColor;
         }
+        .aproved {
+           background-color: rgb(116, 255, 116);
+        }
+        .reproved {
+          background-color: rgb(255, 103, 103);
+        }
       </style>
     </head>
 
@@ -25,7 +31,7 @@
         </div>
         <h2 class="materialize-red-text text-lighten-2 underlined">Dados de Alunos</h2>
 
-        <table class="striped">
+        <table>
         <thead>
           <tr>
               <th>Nome</th>
@@ -67,7 +73,7 @@
           })
 
           const html = alunos.map(aluno => `
-              <tr>
+              <tr class="${aluno.media >= 5 ? 'aproved': 'reproved'}">
                 <td>${aluno.nome}</td>
                 ${ aluno.notas.map(n => `<td>${n}</td>`).join("")}
                 <td>${aluno.media}</td>
