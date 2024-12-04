@@ -62,16 +62,14 @@
           ];
 
           alunos.forEach(aluno => {
-              aluno.media = avarege(...aluno.notas)
+              // aluno.media = avarege(...aluno.notas)
+              aluno.media = avarege.apply(null, aluno.notas)
           })
 
           const html = alunos.map(aluno => `
               <tr>
                 <td>${aluno.nome}</td>
-                <td>${aluno.n1}</td>
-                <td>${aluno.n2}</td>
-                <td>${aluno.n3}</td>
-                <td>${aluno.n4}</td>
+                ${ aluno.notas.map(n => `<td>${n}</td>`).join("")}
                 <td>${aluno.media}</td>
               </tr>
           `).join("")
